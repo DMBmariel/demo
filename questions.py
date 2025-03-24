@@ -20,6 +20,8 @@ answers = [
  ]
  # Índice de la respuesta correcta para cada pregunta, el el mismo orden que las preguntas
 correct_answers_index = [1, 2, 0, 3, 1]
+# inicializamos el puntaje obtenido
+score = 0
 # El usuario deberá contestar 3 preguntas
 for _ in range(3):
  # Se selecciona una pregunta aleatoria
@@ -28,6 +30,7 @@ for _ in range(3):
     print(questions[question_index])
     for i, answer in enumerate(answers[question_index]):
         print(f"{i + 1}. {answer}")
+    correct_answer = False
  # El usuario tiene 2 intentos para responder correctamente
     for intento in range(2):
         user_answer = input("Respuesta: ")
@@ -38,18 +41,22 @@ for _ in range(3):
                 user_answer -= 1
             else:
                 print('Respuesta no valida')
-                continue
         else:
             print('Respuesta no valida')
-            continue
  # Se verifica si la respuesta es correcta
         if user_answer == correct_answers_index[question_index]:
                print("¡Correcto!")
+               score += 1
+               correct_answer = True
                break
-    else:
- # Si el usuario no responde correctamente después de 2 intentos,
- # se muestra la respuesta correcta
-     print("Incorrecto. La respuesta correcta es:")
-     print(answers[question_index] [correct_answers_index[question_index]])
+        else:
+            score -= 0.5 
+    # Si el usuario no responde correctamente después de 2 intentos,
+    # se muestra la respuesta correcta
+    if correct_answer == False:
+        print("Incorrecto. La respuesta correcta es:")
+        print(answers[question_index] [correct_answers_index[question_index]])
  # Se imprime un blanco al final de la pregunta
-     print()
+    print()
+# Se imprime el puntaje obtenido del juego
+print (f" El puntaje obtenido es: {score}") 
